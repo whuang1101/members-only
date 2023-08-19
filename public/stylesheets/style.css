@@ -61,14 +61,14 @@ main {
   border: 1px solid black;
   background-color: rgb(238, 238, 238);
 }
-.form-background {
+.form-background, .login-background {
   height: 100vh;
   width: 100%;
   position: absolute;
   opacity: 0;
   z-index: -1;
 }
-.sign-up-form {
+.sign-up-form, .login-form {
   display: flex;
   position: absolute;
   top: 50%;
@@ -81,7 +81,7 @@ main {
   padding: 1em;
   border-radius: 1em;
   opacity: 0;
-  z-index: -1;  
+  z-index: -1; 
 }
 input {
   width: 100%;
@@ -100,6 +100,10 @@ input {
 .submit-container {
   display: flex;
   justify-content: center;
+}
+.only{
+  font-weight: bolder;
+  color: red;
 }
 form {
   display: flex;
@@ -121,6 +125,14 @@ form {
 .fade-out {
   animation: fadeOut 1s ease-in-out forwards;
   z-index: 2;
+}
+.login {
+  width: 50%;
+}
+.login-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes fadeIn {

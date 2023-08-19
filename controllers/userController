@@ -1,8 +1,17 @@
 const User = require('../models/users');
+const express = require("express")
 const asyncHandler = require('../node_modules/express-async-handler');
 const {body, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
+const passport = require('passport');
 
+// handle login_button
+exports.login_post = [
+    passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect: "/",
+    })
+];
 // handling the sign_up_button
 exports.sign_up_post = [
 
@@ -61,7 +70,6 @@ exports.sign_up_post = [
             else {
                 console.log("saved")
                 await newUser.save();
-                alert("You've successfully Signed Up!");
                 res.redirect("/")
             }
         }

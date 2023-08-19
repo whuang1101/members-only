@@ -6,8 +6,13 @@
     <script src="/javascripts/handleButtons.js" defer></script>
   </head>
   <body>
-    <div class="form-background"> s</div>
+    <div class="form-background"></div>
+    <div class="login-background"></div>
     <%-include('./partials/_sign-up-form')%>
+    <%-include('./partials/_log-in-form')%>
+    <% if (loggedIn) {%>
+      <h1>YESSSSSSS</h1>
+      <%}%>
     <div class="container">
       <% if (typeof user !== 'undefined') { %>
         <%- include('./partials/_header', {user, errors}) %>
@@ -17,7 +22,7 @@
     <main>
       <div class="board-title">Messages</div>
       <div class="message-board">
-        <%-include('./partials/_log-in-form')%>
+        ss
       </div>
     </main>
   </div>
