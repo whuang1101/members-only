@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Members Only</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/handleButtons.js" defer></script>
+  </head>
+  <body>
+    <div class="form-background"> s</div>
+    <%-include('./partials/_sign-up-form')%>
+    <div class="container">
+      <% if (typeof user !== 'undefined') { %>
+        <%- include('./partials/_header', {user, errors}) %>
+      <% } else { %>
+        <%- include('./partials/_header') %>
+      <% } %>
+    <main>
+      <div class="board-title">Messages</div>
+      <div class="message-board">
+        <%-include('./partials/_log-in-form')%>
+      </div>
+    </main>
+  </div>
+  </body>
+</html>

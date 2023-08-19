@@ -1,0 +1,74 @@
+const User = require('../models/users');
+const asyncHandler = require('../node_modules/express-async-handler');
+const {body, validationResult} = require("express-validator");
+const bcrypt = require("bcryptjs");
+
+// handling the sign_up_button
+exports.sign_up_post = [
+
+    body("firstName", "First name must have at least 1 character").trim().isLength({ min: 1 }).escape(),
+    body("lastName", "Last name must have at least 1 character").trim().isLength({ min: 1 }).escape(),
+    body("username", "Username must have at least 5 character").trim().isLength({ min: 5 }).escape(),
+    body("username", "Username can't have spaces").trim().custom((value) => {
+        if (/\s/.test(value)) {
+            throw new Error('Spaces are not allowed in username');
+          }
+          return true;
+    }),
+    body("password", "Password must have at least 8 character").trim().isLength({ min: 8 }).escape(),
+    body('confirm-password')
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Passwords do not match');
+      }
+      return true;
+    }), 
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+        const capitalFirst = req.body.firstName.charAt(0).toUpperCase() + req.body.firstName.slice(1);
+        const capitalLast = req.body.lastName.charAt(0).toUpperCase() + req.body.lastName.slice(1);
+        const lowerUsername = req.body.username.toLowerCase();
+        // declare new user
+        const newUser = new User({
+            first_name: capitalFirst,
+            last_name: capitalLast,
+            username: req.body.username,
+        })
+
+
+        if(!errors.isEmpty()){
+            console.log("no")
+            //reloading form for user ease of use
+            res.render("index", {user:newUser,errors: errors.array()});
+        }
+        else{
+            const betterPassword = await bcrypt.hash(req.body.password, 10);
+            const newUser = new User({
+                first_name: capitalFirst,
+                last_name: capitalLast,
+                username: lowerUsername,
+                password: betterPassword,
+                messages: [],
+                is_member: false,
+                is_admin: false,
+            })
+            const userExists = await User.findOne({username:req.body.username});
+            if(userExists){
+                errors.errors.push({msg: 'Username is already in use'});
+                console.log(errors);
+                res.render("index", {user:newUser,errors: errors.array()});
+            }
+            else {
+                console.log("saved")
+                await newUser.save();
+                alert("You've successfully Signed Up!");
+                res.redirect("/")
+            }
+        }
+      })
+    ];
+
+    
+    
+    
+    

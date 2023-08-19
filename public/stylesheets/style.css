@@ -1,0 +1,173 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.title {  
+  color: black;
+}
+body {
+  position: relative;
+}
+.blur {
+  z-index: 2 !important;
+  background-color: white;
+  animation: actualFadeIn 1s forwards ease-in-out;
+}
+.actual-fade-out {
+  z-index: 2 !important;
+  background-color: white;
+  animation: actualFadeOut 1s forwards ease-in-out;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+header{
+  text-shadow: 0px 0px 1em white;
+  flex: .5;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10% 0em 10%;
+  font-size: 1.3em;
+  background-color: rgb(177, 175, 175);
+  box-shadow: 0px .2em 3em rgb(169, 169, 169);
+}
+.log-ins {
+  gap: 2em;
+  display: flex;
+}
+main {
+  flex: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center ;
+  padding-bottom: 2em;
+}
+
+.board-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex:.5;
+  font-size: 2.5em;
+}
+.message-board {
+  flex: 8;
+  width: clamp(60%, 850px, 100%);
+  border: 1px solid black;
+  background-color: rgb(238, 238, 238);
+}
+.form-background {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.sign-up-form {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: clamp(20%, 17em, 100%);
+  background-color: lightblue;
+  color: black;
+  font-size: clamp(1em,1.5em,2em);
+  padding: 1em;
+  border-radius: 1em;
+  opacity: 0;
+  z-index: -1;  
+}
+input {
+  width: 100%;
+  border: 1px solid grey;
+  outline: none;
+  border-radius: 1em;
+  font-size: 1em;
+  padding: .1em;
+  padding-left: .4em;
+}
+.submit{
+  margin-top: .5em ;
+  width: 50%;
+  padding: 0;
+}
+.submit-container {
+  display: flex;
+  justify-content: center;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+}
+.first, .last,.user,.pass, .confirm-pass {
+  display: flex;
+  flex-direction: column;
+  gap: .2em;
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out forwards;
+  z-index: 2;
+}
+
+.fade-out {
+  animation: fadeOut 1s ease-in-out forwards;
+  z-index: 2;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0) ;
+    transform-origin: center;
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) ; 
+    transform-origin: center;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) ; 
+    transform-origin: center;
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transform-origin: center;
+  }
+}
+
+
+@keyframes actualFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: .5;
+  }
+}
+
+
+@keyframes actualFadeOut {
+  from {
+    opacity: .5;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+
+

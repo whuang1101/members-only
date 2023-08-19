@@ -1,0 +1,62 @@
+<div class="sign-up-form">
+    <% if (typeof user === 'undefined') { %>
+        <form action="/sign-up" method="POST">
+            <input type="hidden" name="action" value="sign-up">
+            <div class="first">
+                <label for="firstName">First Name:</label>
+                <input type="text" required="true" name="firstName" placeholder="John">
+            </div>
+            <div class="last">
+                <label for="lastName">Last Name:</label>
+                <input type="text" required="true" name="lastName" placeholder="Doe">
+            </div>
+            <div class="user">
+                <label for="username">Username: </label>
+                <input type="text" name="username" required="true" placeholder="JohnDoe1">
+            </div>
+            <div class="pass">
+                <label for="password">Password:</label>
+                <input type="password" required="true" name="password">
+            </div>
+            <div class="confirm-pass">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" required="true" name="confirm-password">
+            </div>
+            <div class="submit-container">
+                <input type="submit" class="submit" value="Sign Up">
+            </div>
+        </form>
+    <% } else { %>
+        <form action="/sign-up" method="POST">
+            <input type="hidden" name="action" value="sign-up">
+            <div class="first">
+                <label for="firstName">First Name:</label>
+                <input type="text" required="true" name="firstName" value="<%= user.first_name %>" placeholder="John">
+            </div>
+            <div class="last">
+                <label for="lastName">Last Name:</label>
+                <input type="text" required="true" name="lastName" value="<%= user.last_name %>" placeholder="Doe">
+            </div>
+            <div class="user">
+                <label for="username">Username: </label>
+                <input type="text" name="username" required="true" value="<%= user.username %>" placeholder="JohnDoe1">
+            </div>
+            <div class="pass">
+                <label for="password">Password:</label>
+                <input type="password" required="true" name="password">
+            </div>
+            <div class="confirm-pass">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" required="true" name="confirm-password">
+            </div>
+            <% if (errors.length !== 0) { %>
+                <% for (const error of errors) { %>
+                    <p class="errors"><%= error.msg %></p>
+                <% } %>
+            <% } %>
+            <div class="submit-container">
+                <input type="submit" class="submit" value="Sign Up">
+            </div>
+        </form>
+    <% } %>
+</div>
