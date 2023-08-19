@@ -31,15 +31,16 @@ header{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10% 0em 10%;
+  padding: 0 5% 0em 5%;
   font-size: 1.3em;
   background-color: rgb(177, 175, 175);
   box-shadow: 0px .2em 3em rgb(169, 169, 169);
 }
-.log-ins {
+.log-ins,.welcome-back {
   gap: 2em;
   display: flex;
 }
+
 main {
   flex: 10;
   display: flex;

@@ -12,6 +12,14 @@ exports.login_post = [
         failureRedirect: "/",
     })
 ];
+exports.sign_out = asyncHandler(async(req, res, next) => {
+    req.logout(function (err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/");
+    });
+  });
 // handling the sign_up_button
 exports.sign_up_post = [
 

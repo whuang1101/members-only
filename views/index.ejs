@@ -10,15 +10,16 @@
     <div class="login-background"></div>
     <%-include('./partials/_sign-up-form')%>
     <%-include('./partials/_log-in-form')%>
-    <% if (loggedIn) {%>
-      <h1>YESSSSSSS</h1>
-      <%}%>
     <div class="container">
+      <% if (loggedIn) {%>
+        <%- include('./partials/_log-in-header') %>
+      <%} else {%>
       <% if (typeof user !== 'undefined') { %>
         <%- include('./partials/_header', {user, errors}) %>
       <% } else { %>
         <%- include('./partials/_header') %>
       <% } %>
+      <%}%>
     <main>
       <div class="board-title">Messages</div>
       <div class="message-board">
