@@ -131,6 +131,8 @@ exports.delete_message_post = asyncHandler(async(req, res, next) => {
   // const findUser = await User.findOne({_id: message.user._id}).exec();
   // console.log(findUser)
   console.log(message);
-  console.log(newUser)
+  console.log(newUser);
+  const newUserRemoveId = await User.updateOne({_id: message.user}, {$pull: {messages:messageId}});
+  const deleteOne = await Messages.deleteOne({_id:messageId});
   res.redirect("/")
 })
