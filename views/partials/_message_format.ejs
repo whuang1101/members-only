@@ -1,6 +1,18 @@
 <div class="unique-message">
-    <div class="title"><%=message.title%></div>
-    <div class="user"><%=message.user%></div>
-    <div class="date"><%=message.time_stamp%></div>
-    <div class="text"><%=message.text%></div>
+    <% if (loggedIn) {%>
+        <%if(loggedIn.is_member) {%>
+        <div class="title"><%=message.title%></div>
+        <div class="user">@<%=message.user.username%></div>
+        <div class="date"><%=message.time_stamp%></div>
+        <div class="text"><%=message.text%></div>
+        <%} else {%>
+            <div class="title"><%=message.title%></div>
+            <div class="user">@Anonymous</div>
+            <div class="text"><%=message.text%></div>
+        <%}%>
+    <%} else {%>
+        <div class="title"><%=message.title%></div>
+        <div class="user">@Anonymous</div>
+        <div class="text"><%=message.text%></div>
+    <%}%>
 </div>

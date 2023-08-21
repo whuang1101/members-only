@@ -1,0 +1,13 @@
+<div class="delete-message-form">
+    <form action="/delete-message" method="post" class="form">
+        <h4>Which message would you like to delete? Choose a title:</h4>
+        <select name="confirmation">
+            <%for (let i  =0 ; i < messages.length; i ++) {%>
+                <option value="<%=messages[i]._id%>"><%=messages[i].title%></option>    
+            <%}%>
+        </select>
+        <div class="login-submit">
+            <input type="submit" value="Submit" class="login">
+        </div>
+    </form>
+</div>

@@ -10,9 +10,10 @@
     <div class="login-background"></div>
     <%-include('./partials/_sign-up-form')%>
     <%-include('./partials/_log-in-form')%>
+    <%-include('./partials/_membership')%>
     <div class="container">
       <% if (loggedIn) {%>
-        <%- include('./partials/_log-in-header') %>
+        <%- include('./partials/_log-in-header', {is_member: loggedIn.is_member}) %>
       <%} else {%>
       <% if (typeof user !== 'undefined') { %>
         <%- include('./partials/_header', {user, errors}) %>
@@ -21,10 +22,36 @@
       <% } %>
       <%}%>
     <main>
-      <div class="board-title">Messages</div>
+      <div class="board-title">Members Only Message Board</div>
       <div class="message-board">
+        <%if (loggedIn) {%>
+          <%if(loggedIn.is_member) {%>
+          <div class="add-message">
+            <button class="add-message-button">Add Message</button>
+          </div>
+          <div class="delete-message">
+            <button class="delete-message-button">Delete Message</button>
+          </div>
+        <% }%>
+          <%if(loggedIn.is_admin) {%>
+
+          <%}%>
+        <div class="add-message-form hide">
+          <form action="/add-message" method="post" class="message-form">
+              <label for="messageTitle">Title:</label>
+              <input type="text" name="messageTitle" required= "true">
+              <label for="messageText">Message:</label>
+              <textarea name="messageText" id="messageText" cols="20" rows="5" style ="resize:none" required ="true"></textarea>
+              <div class="message-submit-container">
+              <input type="submit" class="message-submit">
+              <button class="cancel">Cancel</button>
+            </div>
+          </form>
+        </div>
+        <% }%>
         <% for (let i = 0; i < messages.length; i++) { %>
-          <%- include('./partials/_message_format.ejs', { message: messages[i] }) %>
+          <%- include('./partials/_message_format.ejs', { message: messages[i], loggedIn }) %>
+          <%- include("./partials/_delete-message", {messages:messages})%>
         <% } %>
       </div>
     </main>

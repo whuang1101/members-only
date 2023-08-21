@@ -9,7 +9,6 @@ const passport = require('passport');
 exports.get_index = asyncHandler(async(req,res,next) => {
   // retrieve messages from database.
   const messages = await Messages.find().populate("user").exec();
-  console.log(messages);
   res.render('index',{ loggedIn: req.user, messages: messages});
 })
 // handle login_button
@@ -91,8 +90,47 @@ exports.sign_up_post = [
         }
       })
     ];
+exports.become_member_post = asyncHandler(async(req,res,next) => {
+  const secretKey = "apples";
+  const attemptedKey = req.body.secret;
+  const loggedInUser = req.user;
+  if(attemptedKey === secretKey){
+    const findUser = await User.findOne({_id: loggedInUser._id});
+    const updateUser = await User.updateOne(
+      { _id: loggedInUser._id },
+      { $set: { is_member: true } }
+    );
+    res.redirect("/")
+  }
+  else{
+    res.redirect("/")
+  }
+})
+    
+exports.add_message_post = asyncHandler(async(req,res,next) => {
+  const newTitle = req.body.messageTitle;
+  const newText= req.body.messageText;
+  try {
+  const userFound = await User.findOne({_id:req.user._id})
+  if(userFound){
+    const newMessage = new Messages({title: newTitle, text: newText, user: userFound._id, time_stamp: new Date()});
+    await newMessage.save();
+    await User.updateOne({_id: userFound._id}, {$push: {messages: newMessage._id}});
+  }
+  } catch(error){
+    console.error(error);
+  }
+  res.redirect("/")
 
-    
-    
-    
-    
+})
+
+exports.delete_message_post = asyncHandler(async(req, res, next) => {
+  const messageId = req.body.confirmation;
+  const message= await Messages.findOne({_id: messageId});
+  const newUser = await User.findOne({_id: message.user});
+  // const findUser = await User.findOne({_id: message.user._id}).exec();
+  // console.log(findUser)
+  console.log(message);
+  console.log(newUser)
+  res.redirect("/")
+})
