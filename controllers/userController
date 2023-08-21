@@ -1,10 +1,17 @@
 const User = require('../models/users');
+const Messages = require("../models/messages");
 const express = require("express")
 const asyncHandler = require('../node_modules/express-async-handler');
 const {body, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
 const passport = require('passport');
 
+exports.get_index = asyncHandler(async(req,res,next) => {
+  // retrieve messages from database.
+  const messages = await Messages.find().populate("user").exec();
+  console.log(messages);
+  res.render('index',{ loggedIn: req.user, messages: messages});
+})
 // handle login_button
 exports.login_post = [
     passport.authenticate("local", {
@@ -12,6 +19,7 @@ exports.login_post = [
         failureRedirect: "/",
     })
 ];
+
 exports.sign_out = asyncHandler(async(req, res, next) => {
     req.logout(function (err) {
       if (err) {
