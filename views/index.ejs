@@ -15,7 +15,7 @@
     <div class="container">
       <%if (typeof sign_up_error !== "undefined") {%>
           <%if(sign_up_error) {%>
-            <%if (typeof info !== undefined) {%>
+            <%if (typeof info !== "undefined") {%>
               <div class="error-background blur" tabindex="-1"></div>
               <h3 class="error-form fade-in" tabindex="-1">There was an error logging in. <%= info.message%></h3>
               <%}else{%>
