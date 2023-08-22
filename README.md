@@ -6,6 +6,16 @@
 ## Sign up/ Log in Page
 <img width="1495" alt="image" src="https://github.com/whuang1101/members-only/assets/91977590/9fc5b412-2d50-4b01-a82c-6cad8f38a428">
 
+## Video Demo
+
+### Sign up/ Log In
+https://github.com/whuang1101/members-only/assets/91977590/a6987a7e-8f08-4287-817f-5126f8412dee
+
+### Become Member/ Make Message/Sign out
+https://github.com/whuang1101/members-only/assets/91977590/b23b924a-84fb-4c28-8705-ba7c557d3491
+
+
+
 ## Features 
 - Sign up with a unique username and password.
 - Log in to post your own message!
