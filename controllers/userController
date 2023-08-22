@@ -11,6 +11,11 @@ exports.get_index = asyncHandler(async(req,res,next) => {
   const messages = await Messages.find().populate("user").exec();
   res.render('index',{ loggedIn: req.user, messages: messages});
 })
+exports.sign_up_get = asyncHandler(async(req,res,next) => {
+  // retrieve messages from database.
+  const messages = await Messages.find().populate("user").exec();
+  res.render('index',{ loggedIn: req.user, messages: messages});
+})
 // handle login_button
 exports.login_post = [
     passport.authenticate("local", {
@@ -63,7 +68,8 @@ exports.sign_up_post = [
         if(!errors.isEmpty()){
             console.log("no")
             //reloading form for user ease of use
-            res.render("index", {user:newUser,errors: errors.array()});
+            const messages = await Messages.find().exec();
+            res.render("index", {loggedIn: req.user,user:newUser,messages: messages, errors: errors.array(), sign_up_error: true});
         }
         else{
             const betterPassword = await bcrypt.hash(req.body.password, 10);
@@ -80,7 +86,8 @@ exports.sign_up_post = [
             if(userExists){
                 errors.errors.push({msg: 'Username is already in use'});
                 console.log(errors);
-                res.render("index", {user:newUser,errors: errors.array()});
+                const messages = await Messages.find().exec();
+                res.render("index", {loggedIn: false, messages: messages,user:newUser,errors: errors.array(), sign_up_error: true});
             }
             else {
                 console.log("saved")
@@ -133,6 +140,6 @@ exports.delete_message_post = asyncHandler(async(req, res, next) => {
   console.log(message);
   console.log(newUser);
   const newUserRemoveId = await User.updateOne({_id: message.user}, {$pull: {messages:messageId}});
-  const deleteOne = await Messages.deleteOne({_id:messageId});
+  const deleteOne = await Messages.deleteOne({_id:messageId});z
   res.redirect("/")
 })

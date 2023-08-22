@@ -10,12 +10,26 @@ const sign_up_background = document.querySelector(".form-background");
 const login_background = document.querySelector(".login-background");
 const membership_form = document.querySelector(".membership-form");
 const delete_form = document.querySelector(".delete-message-form");
+const error_form = document.querySelector(".error-form")
 
 const add_message = document.querySelector(".add-message-button");
 const add_message_form = document.querySelector(".add-message-form");
 const message_form = document.querySelector(".add-message_form");
-const cancel = document.querySelector(".cancel")
-;
+const cancel = document.querySelector(".cancel");
+const error_background = document.querySelector(".error-background") ;
+if (error_form){
+  error_background.addEventListener("click", () => 
+    {error_background.classList.remove("blur");
+    error_form.classList.remove("fade-in");
+    error_form.classList.add("fade-out");
+    error_background.classList.add("actual-fade-out");
+    setTimeout(() => {
+      error_form.classList.remove("fade-out");
+      error_background.classList.remove("actual-fade-out")
+      }, 500);
+  }
+  )
+}
 if(membership)
 {
   membership.addEventListener("click", () => {

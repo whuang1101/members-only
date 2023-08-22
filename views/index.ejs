@@ -6,12 +6,19 @@
     <script src="/javascripts/handleButtons.js" defer></script>
   </head>
   <body>
+
     <div class="form-background"></div>
     <div class="login-background"></div>
     <%-include('./partials/_sign-up-form')%>
     <%-include('./partials/_log-in-form')%>
     <%-include('./partials/_membership')%>
     <div class="container">
+      <%if (typeof sign_up_error !== "undefined") {%>
+          <%if(sign_up_error) {%>
+            <div class="error-background blur"></div>
+            <h3 class="error-form fade-in">There was an error signing up please see sign-up form for details.</h3>
+            <%}%>
+        <%}%>
       <% if (loggedIn) {%>
         <%- include('./partials/_log-in-header', {is_member: loggedIn.is_member}) %>
       <%} else {%>
