@@ -1,7 +1,7 @@
 const User = require('../models/users');
 const Messages = require("../models/messages");
 const express = require("express")
-const asyncHandler = require('../node_modules/express-async-handler');
+const asyncHandler = require('express-async-handler');
 const {body, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
 const passport = require('passport');
@@ -133,6 +133,8 @@ exports.become_member_post = asyncHandler(async(req,res,next) => {
 exports.add_message_post = asyncHandler(async(req,res,next) => {
   const newTitle = req.body.messageTitle;
   const newText= req.body.messageText;
+  const loggedInUser = req.user;
+  console.log(loggedInUser)
   try {
   const userFound = await User.findOne({_id:req.user._id})
   if(userFound){
@@ -156,6 +158,6 @@ exports.delete_message_post = asyncHandler(async(req, res, next) => {
   console.log(message);
   console.log(newUser);
   const newUserRemoveId = await User.updateOne({_id: message.user}, {$pull: {messages:messageId}});
-  const deleteOne = await Messages.deleteOne({_id:messageId});z
+  const deleteOne = await Messages.deleteOne({_id:messageId});
   res.redirect("/")
 })
