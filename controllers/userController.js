@@ -146,12 +146,12 @@ exports.add_message_post = asyncHandler(async (req, res) => {
       });
       await newMessage.save();
       await User.updateOne({ _id: userFound._id }, { $push: { messages: newMessage._id } });
+      res.redirect('/');
     }
   } catch (error) {
     console.error(error);
   }
   
-  res.redirect('/');
 });
 
 exports.delete_message_post = asyncHandler(async (req, res) => {
