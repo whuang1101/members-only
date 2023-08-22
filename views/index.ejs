@@ -32,15 +32,13 @@
       <div class="board-title">Members Only Message Board</div>
       <div class="message-board">
         <%if (loggedIn) {%>
-          <%if(loggedIn.is_member) {%>
           <div class="add-message">
             <button class="add-message-button">Add Message</button>
           </div>
-          <div class="delete-message">
-            <button class="delete-message-button">Delete Message</button>
-          </div>
-        <% }%>
           <%if(loggedIn.is_admin) {%>
+            <div class="delete-message">
+              <button class="delete-message-button">Delete Message</button>
+            </div>
 
           <%}%>
         <div class="add-message-form hide">
