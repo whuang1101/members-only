@@ -8,7 +8,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const session = require("express-session");
 const passport = require("passport");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
+const flash = require('express-flash');
+
 //hiding key using dotenv
 require("dotenv").config();
 const mongoDb = process.env.SECRET_KEY;
@@ -37,12 +39,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 const LocalStrategy = require("passport-local").Strategy;
 passport.use(
     new LocalStrategy(async(username, password, done) => {
       try {
         const user = await User.findOne({ username: username.toLowerCase() });
         if (!user) {
+        
           return done(null, false, { message: "Incorrect username" });
         };
         const match = await bcrypt.compare(password, user.password);
@@ -69,6 +74,7 @@ try {
 };
 });
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(function(req, res, next) {

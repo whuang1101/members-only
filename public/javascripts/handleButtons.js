@@ -26,7 +26,7 @@ if (error_form){
     setTimeout(() => {
       error_form.classList.remove("fade-out");
       error_background.classList.remove("actual-fade-out")
-      }, 500);
+      }, 1000);
   }
   )
 }
@@ -45,7 +45,7 @@ if(membership)
     setTimeout(() => {
     membership_form.classList.remove("fade-out");
     sign_up_background.classList.remove("actual-fade-out")
-    }, 500);
+    }, 1000);
   })
 }
 if(add_message){
@@ -76,7 +76,7 @@ if(add_message){
     setTimeout(() => {
     delete_form.classList.remove("fade-out");
     sign_up_background.classList.remove("actual-fade-out")
-    }, 500);
+    }, 1000);
   })
 }
 if(login)
@@ -100,7 +100,7 @@ login_background.addEventListener ("click", () => {
   setTimeout(() => {
   login_form.classList.remove("fade-out");
   login_background.classList.remove("actual-fade-out")
-  }, 500);
+  }, 1000);
 })
 background.addEventListener("click", () => {
     console.log("Button clicked");
@@ -112,5 +112,5 @@ background.addEventListener("click", () => {
     setTimeout(() => {
     sign_up_form.classList.remove("fade-out");
     sign_up_background.classList.remove("actual-fade-out")
-    }, 500);
+    }, 1000);
   });}
