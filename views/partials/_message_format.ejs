@@ -1,18 +1,18 @@
-<div class="unique-message">
+<div class="unique-message" tabindex="0">
     <% if (loggedIn) {%>
         <%if(loggedIn.is_member) {%>
-        <div class="title"><%=message.title%></div>
-        <div class="user">@<%=message.user.username%></div>
-        <div class="date"><%=message.time_stamp%></div>
-        <div class="text"><%=message.text%></div>
+        <div class="title" tabindex="0"><%=message.title%></div>
+        <div class="user" tabindex="0">@<%=message.user.username%></div>
+        <div class="date" tabindex="0"><%=message.time_stamp%></div>
+        <div class="text" tabindex="0"><%=message.text%></div>
         <%} else {%>
-            <div class="title"><%=message.title%></div>
-            <div class="user">@Anonymous</div>
-            <div class="text"><%=message.text%></div>
+            <div class="title" tabindex="0"><%=message.title%></div>
+            <div class="user" tabindex="0">@Anonymous</div>
+            <div class="text" tabindex="0"><%=message.text%></div>
         <%}%>
     <%} else {%>
-        <div class="title"><%=message.title%></div>
-        <div class="user">@Anonymous</div>
-        <div class="text"><%=message.text%></div>
+        <div class="title" tabindex="0"><%=message.title%></div>
+        <div class="user" tabindex="0">@Anonymous</div>
+        <div class="text" tabindex="0"><%=message.text%></div>
     <%}%>
 </div>

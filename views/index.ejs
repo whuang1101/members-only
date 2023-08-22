@@ -7,8 +7,8 @@
   </head>
   <body>
 
-    <div class="form-background"></div>
-    <div class="login-background"></div>
+    <div class="form-background" tabindex="-1"></div>
+    <div class="login-background" tabindex="-1"></div>
     <%-include('./partials/_sign-up-form')%>
     <%-include('./partials/_log-in-form')%>
     <%-include('./partials/_membership')%>
@@ -16,11 +16,11 @@
       <%if (typeof sign_up_error !== "undefined") {%>
           <%if(sign_up_error) {%>
             <%if (typeof info !== undefined) {%>
-              <div class="error-background blur"></div>
-              <h3 class="error-form fade-in">There was an error logging in. <%= info.message%></h3>
+              <div class="error-background blur" tabindex="-1"></div>
+              <h3 class="error-form fade-in" tabindex="-1">There was an error logging in. <%= info.message%></h3>
               <%}else{%>
-            <div class="error-background blur"></div>
-            <h3 class="error-form fade-in">There was an error signing up please see sign-up form for details.</h3>
+            <div class="error-background blur" tabindex="-1"></div>
+            <h3 class="error-form fade-in" tabindex="-1">There was an error signing up please see sign-up form for details.</h3>
             <%}%>
             <%}%>
         <%}%>
@@ -34,8 +34,8 @@
       <% } %>
       <%}%>
     <main>
-      <div class="board-title">Members Only Message Board</div>
-      <div class="message-board">
+      <div class="board-title" tabindex="0">Members Only Message Board</div>
+      <div class="message-board" tabindex="0">
         <%if (loggedIn) {%>
           <div class="add-message">
             <button class="add-message-button">Add Message</button>
@@ -43,6 +43,9 @@
           <%if(loggedIn.is_admin) {%>
             <div class="delete-message">
               <button class="delete-message-button">Delete Message</button>
+              <% for (let i = 0; i < messages.length; i++) { %>
+                <%- include("./partials/_delete-message", {messages:messages})%>
+              <% } %>
             </div>
 
           <%}%>
@@ -61,7 +64,6 @@
         <% }%>
         <% for (let i = 0; i < messages.length; i++) { %>
           <%- include('./partials/_message_format.ejs', { message: messages[i], loggedIn }) %>
-          <%- include("./partials/_delete-message", {messages:messages})%>
         <% } %>
       </div>
     </main>

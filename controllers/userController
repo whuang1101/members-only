@@ -25,17 +25,21 @@ exports.login_post = async function(req, res, next) {
       if (!user) {
           try {
               const messages = await Messages.find().populate("user").exec();
-              console.log(info.message)
-              return res.render('index', { loggedIn: req.user, messages: messages, sign_up_error:true,info: info });
+              console.log(info.message);
+              return res.render('index', { loggedIn: req.user, messages: messages, sign_up_error: true, info: info });
           } catch (error) {
               console.error(error);
               return res.redirect("/");
           }
       }
-      return res.redirect("/");
+      req.login(user, function(err) {
+          if (err) {
+              return next(err);
+          }
+          return res.redirect("/");
+      });
   })(req, res, next);
 };
-
 exports.sign_out = asyncHandler(async(req, res, next) => {
     req.logout(function (err) {
       if (err) {

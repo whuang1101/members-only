@@ -40,6 +40,8 @@ header{
 .log-ins,.welcome-back {
   gap: 1em;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 main {
@@ -73,6 +75,23 @@ main {
   position: absolute;
   opacity: 0;
   z-index: -1;
+}
+.sign-up-button, .log-in-button, .sign-out, .membership {
+  padding: .5em;
+  border: 1px solid black;
+  border-radius: 1em;
+  background-color: black;
+  color: white;
+}
+.log-in-button:hover, .sign-up-button:hover, .membership:hover {
+  padding: .5em;
+  border: 1px solid white;
+  border-radius: 1em;
+  background-color: white;
+  color: black !important;
+}
+a {
+  color:white;
 }
 .sign-up-form, .login-form, .membership-form, .delete-message-form, .error-form {
   display: flex;
@@ -251,5 +270,11 @@ input {
   }
 }
 
-
-
+@media screen and (max-width: 1000px) {  
+* {
+  font-size:1.1em;
+}
+main {
+  padding: 0em;
+}
+}
