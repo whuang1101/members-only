@@ -3,7 +3,9 @@ var router = express.Router();
 const form = require('../controllers/userController');
 /* GET home page. */
 router.get('/', form.get_index);
-
+router.get("/membership", form.get_index);
+router.get("/add-message",form.get_index);
+router.get("/delete-message",form.get_index)
 router.get('/sign-up',form.get_index);
 router.get('/sign-out', form.sign_out);
 router.get("/login", form.get_index);

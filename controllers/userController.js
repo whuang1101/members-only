@@ -130,34 +130,43 @@ exports.become_member_post = asyncHandler(async(req,res,next) => {
   }
 })
     
-exports.add_message_post = asyncHandler(async(req,res,next) => {
+exports.add_message_post = asyncHandler(async (req, res) => {
   const newTitle = req.body.messageTitle;
-  const newText= req.body.messageText;
+  const newText = req.body.messageText;
   const loggedInUser = req.user;
-  console.log(loggedInUser)
+  
   try {
-  const userFound = await User.findOne({_id:req.user._id})
-  if(userFound){
-    const newMessage = new Messages({title: newTitle, text: newText, user: userFound._id, time_stamp: new Date()});
-    await newMessage.save();
-    await User.updateOne({_id: userFound._id}, {$push: {messages: newMessage._id}});
-  }
-  } catch(error){
+    const userFound = await User.findOne({ _id: req.user._id });
+    if (userFound) {
+      const newMessage = new Messages({
+        title: newTitle,
+        text: newText,
+        user: userFound._id,
+        time_stamp: new Date()
+      });
+      await newMessage.save();
+      await User.updateOne({ _id: userFound._id }, { $push: { messages: newMessage._id } });
+    }
+  } catch (error) {
     console.error(error);
   }
-  res.redirect("/")
+  
+  res.redirect('/');
+});
 
-})
-
-exports.delete_message_post = asyncHandler(async(req, res, next) => {
+exports.delete_message_post = asyncHandler(async (req, res) => {
   const messageId = req.body.confirmation;
-  const message= await Messages.findOne({_id: messageId});
-  const newUser = await User.findOne({_id: message.user});
-  // const findUser = await User.findOne({_id: message.user._id}).exec();
-  // console.log(findUser)
+  const message = await Messages.findOne({ _id: messageId });
+  const newUser = await User.findOne({ _id: message.user });
+  
   console.log(message);
   console.log(newUser);
-  const newUserRemoveId = await User.updateOne({_id: message.user}, {$pull: {messages:messageId}});
-  const deleteOne = await Messages.deleteOne({_id:messageId});
-  res.redirect("/")
-})
+  
+  const newUserRemoveId = await User.updateOne(
+    { _id: message.user },
+    { $pull: { messages: messageId } }
+  );
+  const deleteOne = await Messages.deleteOne({ _id: messageId });
+  
+  res.redirect('/');
+});

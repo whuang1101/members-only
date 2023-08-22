@@ -73,9 +73,8 @@ try {
     done(err);
 };
 });
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
-app.use(flash());
 app.use(passport.initialize());
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.session());
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
