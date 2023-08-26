@@ -35,4 +35,4 @@ https://github.com/whuang1101/members-only/assets/91977590/b23b924a-84fb-4c28-87
 
   ## Works
 - [Previous Project: Shopping Cart](https://github.com/whuang1101/Shopping-Cart)
-- [Next Project BlogAPI](https://github.com/whuang1101/blog_client)
+- [Next Project: BlogAPI](https://github.com/whuang1101/blog_client)
